@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620">
+  <rect width="1100" height="620" fill="#f8fafc"/>
+  <rect x="24" y="24" width="1052" height="572" rx="18" fill="#ffffff" stroke="#dbe4ef"/>
+  <text x="56" y="72" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#0f2f57">Private AI Investment Concentration</text>
+  <text x="56" y="102" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#64748b">2025 private AI investment by country, USD billions.</text>
+  <line x1="230" y1="120" x2="230" y2="280" stroke="#cbd5e1"/>
+  <line x1="230" y1="280" x2="1010" y2="280" stroke="#cbd5e1"/><text x="56" y="167" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">United States</text>
+    <rect x="230" y="140" width="743.3399999999999" height="42" rx="8" fill="#0f2f57"/>
+    <text x="920" y="167" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0f172a">285.9B</text><text x="56" y="237" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">China</text>
+    <rect x="230" y="210" width="32.24" height="42" rx="8" fill="#0f2f57"/>
+    <text x="274.24" y="237" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0f172a">12.4B</text>
+</svg>

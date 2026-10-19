@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 216 33% 97%;
+  --foreground: 224 46% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 46% 10%;
+  --muted: 215 35% 93%;
+  --muted-foreground: 217 22% 37%;
+  --primary: 251 78% 58%;
+  --primary-foreground: 0 0% 100%;
+  --border: 216 30% 84%;
+  --accent-blue: 212 100% 56%;
+  --success: 145 75% 47%;
+  --warning: 34 95% 55%;
+  --danger: 0 84% 62%;
+  --elevated: 218 36% 95%;
+}
+
+.dark {
+  --background: 224 35% 6%;
+  --foreground: 210 20% 96%;
+  --card: 222 35% 11%;
+  --card-foreground: 210 20% 96%;
+  --muted: 222 25% 17%;
+  --muted-foreground: 216 10% 68%;
+  --primary: 251 78% 58%;
+  --primary-foreground: 0 0% 100%;
+  --border: 222 30% 22%;
+  --accent-blue: 212 100% 56%;
+  --success: 145 75% 47%;
+  --warning: 34 95% 55%;
+  --danger: 0 84% 62%;
+  --elevated: 222 35% 14%;
+}
+
+body {
+  background:
+    radial-gradient(circle at 18% 0%, hsl(var(--primary) / 0.10), transparent 24rem),
+    radial-gradient(circle at 92% 8%, hsl(var(--accent-blue) / 0.10), transparent 22rem),
+    linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--elevated)) 48%, hsl(var(--background)) 100%),
+    hsl(var(--background));
+  color: hsl(var(--foreground));
+  min-height: 100vh;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at 18% 0%, hsl(var(--primary) / 0.11), transparent 24rem),
+    radial-gradient(circle at 92% 8%, hsl(var(--accent-blue) / 0.10), transparent 22rem),
+    linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--elevated)) 48%, hsl(var(--background)) 100%),
+    hsl(var(--background));
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+input, select, textarea {
+  color: hsl(var(--foreground));
+}
+
+.auth-input {
+  background-color: rgba(6, 21, 40, 0.78) !important;
+}
+
+.auth-input:hover {
+  background-color: rgba(6, 21, 40, 0.86) !important;
+}
+
+.auth-input:focus {
+  background-color: #071a34 !important;
+}
+
+.auth-input:-webkit-autofill,
+.auth-input:-webkit-autofill:hover,
+.auth-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+  box-shadow: 0 0 0 1000px rgba(6, 21, 40, 0.98) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.35);
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-in {
+  animation: page-in 220ms ease-out both;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border: 2px solid hsl(var(--background));
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.55);
+}
+
+.sidebar-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

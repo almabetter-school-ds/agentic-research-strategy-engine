@@ -1,0 +1,68 @@
+# Dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Build outputs
+.next/
+frontend/.next/
+out/
+dist/
+build/
+
+# Test and coverage output
+coverage/
+frontend/coverage/
+backend/coverage/
+.nyc_output/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+backend/server-start.*.log
+
+# Runtime/cache files
+.cache/
+.turbo/
+.vercel/
+tmp/
+temp/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local certificates and keys
+*.pem
+*.key
+*.crt
+
+# Generated exports
+analysis.pdf
+analysis.docx
+analysis.xlsx
+analysis.pptx
+analysis.csv
+analysis.json
+
+# Local frontend environment secrets
+frontend/.env.local

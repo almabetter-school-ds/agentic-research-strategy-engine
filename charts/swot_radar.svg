@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620">
+  <rect width="1100" height="620" fill="#f8fafc"/>
+  <rect x="24" y="24" width="1052" height="572" rx="18" fill="#ffffff" stroke="#dbe4ef"/>
+  <text x="56" y="72" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#0f2f57">SWOT Balance Radar</text>
+  <text x="56" y="102" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#64748b">Count of material SWOT factors identified for the platform and market-entry strategy.</text>
+  <polygon points="550,302 588,340 550,378 512,340" fill="none" stroke="#dbe4ef"/><polygon points="550,264 626,340 550,416 474,340" fill="none" stroke="#dbe4ef"/><polygon points="550,226 664,340 550,454 436,340" fill="none" stroke="#dbe4ef"/><polygon points="550,188 702,340 550,492 398,340" fill="none" stroke="#dbe4ef"/><polygon points="550,150 740,340 550,530 360,340" fill="none" stroke="#dbe4ef"/><line x1="550" y1="340" x2="550" y2="150" stroke="#dbe4ef"/>
+    <text x="550" y="108" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">Strengths</text><line x1="550" y1="340" x2="740" y2="340" stroke="#dbe4ef"/>
+    <text x="796" y="340" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">Weaknesses</text><line x1="550" y1="340" x2="550" y2="530" stroke="#dbe4ef"/>
+    <text x="550" y="572" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">Opportunities</text><line x1="550" y1="340" x2="360" y2="340" stroke="#dbe4ef"/>
+    <text x="304" y="340" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">Threats</text><polygon points="550,188 664,340 550,530 398,340" fill="#2563eb" opacity="0.28" stroke="#1d4ed8" stroke-width="4"/>
+</svg>

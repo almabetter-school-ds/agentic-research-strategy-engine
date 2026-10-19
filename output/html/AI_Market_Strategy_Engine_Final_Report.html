@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>AI Market Strategy Engine</title>
+<style>
+  :root {
+    --navy: #0f2f57;
+    --blue: #2563eb;
+    --light-blue: #eaf2ff;
+    --text: #172033;
+    --muted: #667085;
+    --line: #d9e2ef;
+    --soft: #f6f8fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--text);
+    background: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.42;
+  }
+  .report {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .cover-page {
+    min-height: 870px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 58px;
+    background:
+      linear-gradient(90deg, var(--navy) 0 13px, transparent 13px),
+      linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid var(--line);
+  }
+  .cover-page h1 {
+    max-width: 760px;
+    margin: 0 0 18px;
+    color: var(--navy);
+    font-size: 48pt;
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+  .cover-page h2 {
+    max-width: 690px;
+    margin: 0 0 44px;
+    color: #334155;
+    font-size: 17pt;
+    font-weight: 500;
+  }
+  .cover-page p {
+    color: #475569;
+    font-size: 12pt;
+    margin: 7px 0;
+  }
+  h1, h2, h3, h4 {
+    color: var(--navy);
+    line-height: 1.18;
+    letter-spacing: 0;
+    page-break-after: avoid;
+  }
+  h1 { font-size: 28pt; margin: 34px 0 16px; }
+  h2 {
+    border-top: 4px solid var(--navy);
+    padding-top: 14px;
+    margin: 34px 0 14px;
+    font-size: 22pt;
+  }
+  h3 { color: #1e3a8a; margin: 22px 0 10px; font-size: 14pt; }
+  h4 { margin: 18px 0 8px; font-size: 12pt; }
+  p { margin: 7px 0 10px; }
+  a { color: #1d4ed8; text-decoration: none; }
+  ul { margin: 7px 0 14px 21px; padding: 0; }
+  li { margin: 4px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 18px;
+    page-break-inside: avoid;
+    font-size: 9.2pt;
+  }
+  th {
+    background: var(--navy);
+    color: white;
+    text-align: left;
+    padding: 8px 9px;
+    font-weight: 700;
+  }
+  td {
+    border-bottom: 1px solid var(--line);
+    padding: 8px 9px;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f8fafc; }
+  blockquote {
+    margin: 10px 0 16px;
+    padding: 12px 14px;
+    border-left: 4px solid var(--blue);
+    background: var(--light-blue);
+    page-break-inside: avoid;
+  }
+  blockquote p {
+    margin: 4px 0;
+    font-size: 10pt;
+  }
+  figure {
+    margin: 14px 0 22px;
+    page-break-inside: avoid;
+    border: 1px solid var(--line);
+    background: #ffffff;
+    padding: 8px;
+  }
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  figcaption {
+    color: var(--muted);
+    font-size: 8.5pt;
+    margin-top: 5px;
+  }
+  .page-break { break-after: page; page-break-after: always; }
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h2 { break-before: page; }
+    .cover-page h1, .cover-page h2 { break-before: auto; }
+  }
+</style>
+</head>
+<body><main class="report"><div class="cover-page">
+<h1 id="ai-market-strategy-engine">AI Market Strategy Engine</h1>
+<h2 id="executive-market-intelligence-competitive-strategy-and-growth-roadmap">Executive Market Intelligence, Competitive Strategy, and Growth Roadmap</h2>
+<p><strong>Date:</strong> August 7, 2026  </p>
+<p><strong>Company / Project:</strong> AI Market Strategy Engine Project  </p>
+<p><strong>Prepared for:</strong> Executive strategy review  </p>
+<p><strong>Theme:</strong> Blue / white / gray consulting report</p>
+</div>
+<div class="page-break"></div>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#executive-summary">Executive Summary</a></li>
+<li><a href="#market-overview">Market Overview</a></li>
+<li><a href="#industry-trends">Industry Trends</a></li>
+<li><a href="#competitor-analysis">Competitor Analysis</a></li>
+<li><a href="#swot-analysis">SWOT Analysis</a></li>
+<li><a href="#customer-insights">Customer Insights</a></li>
+<li><a href="#market-opportunities">Market Opportunities</a></li>
+<li><a href="#risk-analysis">Risk Analysis</a></li>
+<li><a href="#ai-generated-strategic-recommendations">AI-generated Strategic Recommendations</a></li>
+<li><a href="#interactive-charts">Interactive Charts</a></li>
+<li><a href="#data-tables">Data Tables</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#appendix">Appendix</a></li>
+</ul>
+<div class="page-break"></div>
+<h2 id="executive-summary">Executive Summary</h2>
+<h3 id="board-level-takeaways">Board-Level Takeaways</h3>
+<table><thead><tr><th>Decision Topic</th><th>Executive View</th><th>Implication</th></tr></thead><tbody>
+<tr><td>Market timing</td><td>AI spend and adoption are accelerating sharply, but value capture is uneven.</td><td>Prioritize use cases that close the evidence-to-decision gap, not generic AI productivity.</td></tr>
+<tr><td>Strategic wedge</td><td>The engine's strongest position is governed, source-backed research automation for consultants and corporate strategy teams.</td><td>Lead with workflow governance, auditability, and reusable research memory.</td></tr>
+<tr><td>Competitive position</td><td>Incumbents are strong in content, data, and advisory brands; the project differentiates through end-to-end agentic workflow orchestration.</td><td>Build defensibility around evidence lineage, validation, reviewer approvals, and Qdrant-backed memory.</td></tr>
+<tr><td>Risk posture</td><td>AI governance and security gaps are material market concerns.</td><td>Productize trust controls as core functionality, not compliance afterthoughts.</td></tr>
+<tr><td>Recommended stance</td><td>Proceed with focused commercialization around enterprise strategy workflows.</td><td>Target high-value teams with repeatable research cadences and board-facing outputs.</td></tr>
+</tbody></table>
+<h3 id="kpi-snapshot">KPI Snapshot</h3>
+<blockquote>
+<p><strong>AI spending growth, 2026: 47%</strong> - Gartner forecast for worldwide AI spending growth</p>
+</blockquote>
+<blockquote>
+<p><strong>Worldwide AI spend, 2026: $2.59T</strong> - Gartner forecast; vendor and hyperscaler dominated</p>
+</blockquote>
+<blockquote>
+<p><strong>Organizations using AI: 88%</strong> - McKinsey 2025 survey, regular use in at least one function</p>
+</blockquote>
+<blockquote>
+<p><strong>Agentic AI activity: 62%</strong> - McKinsey respondents experimenting with or scaling AI agents</p>
+</blockquote>
+<blockquote>
+<p><strong>Enterprise EBIT impact: 39%</strong> - McKinsey respondents reporting EBIT impact at enterprise level</p>
+</blockquote>
+<blockquote>
+<p><strong>U.S. private AI investment: $285.9B</strong> - Stanford AI Index 2026, 2025 investment</p>
+</blockquote>
+<blockquote>
+<p><strong>Average breach cost: $4.44M</strong> - IBM Cost of a Data Breach Report 2025</p>
+</blockquote>
+<blockquote>
+<p><strong>AI governance gap: 63%</strong> - IBM: breached organizations without or still developing AI governance</p>
+</blockquote>
+<figure><img src="../charts/ai_adoption_value_gap.png" alt="AI adoption and value capture gap"/><figcaption>AI adoption and value capture gap</figcaption></figure>
+<p><strong>Sources:</strong> <a href="../README.md">README</a> | <a href="../docs/ARCHITECTURE.md">Architecture</a> | <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI</a> | <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-forecasts-worldwide-ai-spending-to-grow-47-percent-in-2026">Gartner AI Spending</a></p>
+<h2 id="market-overview">Market Overview</h2>
+<h3 id="market-definition">Market Definition</h3>
+<p>The relevant market is the intersection of:</p>
+<table><thead><tr><th>Layer</th><th>Description</th><th>Buying Trigger</th></tr></thead><tbody>
+<tr><td>AI research automation</td><td>Agentic workflows that plan, search, extract, validate, aggregate, and draft research.</td><td>Faster strategy cycles and analyst leverage.</td></tr>
+<tr><td>Market intelligence platforms</td><td>Competitive, customer, trend, and market signal monitoring.</td><td>Need for source-backed decisions and repeatable tracking.</td></tr>
+<tr><td>Consulting enablement</td><td>Executive-ready outputs, evidence review, audit trail, and reusable knowledge.</td><td>Need for board-quality deliverables with governance.</td></tr>
+</tbody></table>
+<h3 id="market-scale-signals">Market Scale Signals</h3>
+<table><thead><tr><th>Metric</th><th>Value</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>Worldwide AI spending forecast, 2026</td><td>$2.59T</td><td>Large budget pool, with infrastructure leading but enterprise applications accelerating.</td></tr>
+<tr><td>AI spending growth, 2026</td><td>47%</td><td>Demand is expanding faster than most enterprise software categories.</td></tr>
+<tr><td>AI infrastructure spending, 2026</td><td>$1.43T</td><td>Compute-heavy ecosystem creates opportunity for workflow tools that prove ROI.</td></tr>
+<tr><td>AI services spending, 2026</td><td>$585.5B</td><td>Consulting and implementation budgets remain meaningful adoption channels.</td></tr>
+<tr><td>Organizations using AI in at least one function</td><td>88%</td><td>Adoption is mainstream; differentiation shifts to value capture and governance.</td></tr>
+</tbody></table>
+<figure><img src="../charts/ai_spending_by_market.png" alt="Worldwide AI spending by market"/><figcaption>Worldwide AI spending by market</figcaption></figure>
+<figure><img src="../charts/ai_private_investment_gap.png" alt="Private AI investment gap"/><figcaption>Private AI investment gap</figcaption></figure>
+<p><strong>Sources:</strong> <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-forecasts-worldwide-ai-spending-to-grow-47-percent-in-2026">Gartner AI Spending</a> | <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report">Stanford AI Index 2026</a> | <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI</a></p>
+<h2 id="industry-trends">Industry Trends</h2>
+<table><thead><tr><th>Trend</th><th>Evidence Signal</th><th>Strategic Meaning</th></tr></thead><tbody>
+<tr><td>Agentic workflows move from pilots to operations</td><td>62% of McKinsey respondents are experimenting with or scaling AI agents.</td><td>Workflow orchestration becomes the enterprise buying frame.</td></tr>
+<tr><td>Value capture lags adoption</td><td>88% regular AI use versus 39% enterprise-level EBIT impact.</td><td>Buyers will reward tools that connect AI output to measurable decisions.</td></tr>
+<tr><td>AI infrastructure arms race continues</td><td>Gartner forecasts infrastructure as the largest AI spending category through 2027.</td><td>SaaS tools must show clear leverage on expensive AI consumption.</td></tr>
+<tr><td>Frontier-model competition compresses</td><td>Stanford reports the U.S.-China performance gap has effectively closed.</td><td>Product differentiation cannot depend only on model access.</td></tr>
+<tr><td>Responsible AI becomes a commercial requirement</td><td>Stanford reports documented AI incidents rose from 233 in 2024 to 362.</td><td>Governance, validation, and audit logs should be core selling points.</td></tr>
+</tbody></table>
+<h3 id="implications-for-the-project">Implications for the Project</h3>
+<ul>
+<li>Make evidence quality, reviewer approval, and source lineage visible in every workflow.</li>
+<li>Position the engine as a decision system for strategy work, not only a chatbot or dashboard.</li>
+<li>Package repeatable playbooks by use case: competitor monitoring, market entry, customer segmentation, investment thesis, and risk tracking.</li>
+</ul>
+<figure><img src="../charts/ai_adoption_value_gap.png" alt="AI adoption and value capture gap"/><figcaption>AI adoption and value capture gap</figcaption></figure>
+<p><strong>Sources:</strong> <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report">Stanford AI Index 2026</a> | <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI</a> | <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-forecasts-worldwide-ai-spending-to-grow-47-percent-in-2026">Gartner AI Spending</a></p>
+<h2 id="competitor-analysis">Competitor Analysis</h2>
+<h3 id="competitive-landscape">Competitive Landscape</h3>
+<table><thead><tr><th>Competitor / Archetype</th><th>Core Strength</th><th>Relative Gap</th><th>Strategic Response</th></tr></thead><tbody>
+<tr><td>AI Market Strategy Engine</td><td>End-to-end governed research workflow, validation, memory, and reports.</td><td>Needs external brand credibility and production usage proof.</td><td>Demonstrate repeatable outcomes and evidence quality.</td></tr>
+<tr><td>AlphaSense</td><td>Enterprise content discovery and financial research workflows.</td><td>Less differentiated in custom agentic research orchestration.</td><td>Emphasize planning-to-report workflow automation.</td></tr>
+<tr><td>CB Insights</td><td>Startup, market, and technology intelligence data.</td><td>Dataset-led rather than custom research-agent workflow-led.</td><td>Partner or integrate where structured external data matters.</td></tr>
+<tr><td>Gartner</td><td>Brand authority, analyst trust, executive advisory.</td><td>High-cost advisory model with less self-serve workflow automation.</td><td>Compete on speed, customization, and evidence traceability.</td></tr>
+<tr><td>Similarweb</td><td>Digital traffic and competitive web analytics.</td><td>Strong signal data, narrower strategy-reporting workflow.</td><td>Integrate digital demand signals into broader strategy views.</td></tr>
+<tr><td>Perplexity Enterprise</td><td>Fast answer generation and source discovery.</td><td>Less specialized for governed consulting deliverables.</td><td>Differentiate on review, audit, workflow state, and reusable knowledge.</td></tr>
+</tbody></table>
+<figure><img src="../charts/competitive_capability_index.png" alt="Competitive capability index"/><figcaption>Competitive capability index</figcaption></figure>
+<h3 id="win-themes">Win Themes</h3>
+<ul>
+<li><strong>Workflow depth:</strong> Intake, planning, approval, browsing, extraction, validation, aggregation, report writing, and feedback.</li>
+<li><strong>Evidence discipline:</strong> Source records, confidence scores, validation results, and reviewer decisions.</li>
+<li><strong>Memory advantage:</strong> Qdrant-backed knowledge memory for reusable market insights and competitor movements.</li>
+<li><strong>Executive packaging:</strong> Dashboards and report-generation surfaces built for consulting-grade outputs.</li>
+</ul>
+<p><strong>Sources:</strong> <a href="../README.md">README</a> | <a href="../docs/ARCHITECTURE.md">Architecture</a> | <a href="../backend/src/controllers/assistant.controller.js">Assistant Controller</a></p>
+<h2 id="swot-analysis">SWOT Analysis</h2>
+<table><thead><tr><th>Strengths</th><th>Weaknesses</th></tr></thead><tbody>
+<tr><td>Governed multi-agent research workflow.</td><td>External market data still requires source validation.</td></tr>
+<tr><td>Evidence records, confidence scores, reviewer actions, and audit logs.</td><td>AI provider quota and availability dependency.</td></tr>
+<tr><td>Qdrant-backed reusable market memory.</td><td>Needs clear production proof points and customer benchmarks.</td></tr>
+<tr><td>Broad dashboard modules: market, competition, SWOT, forecasting, evidence review, and reports.</td><td>Integrations and data partnerships are still a scale requirement.</td></tr>
+</tbody></table>
+<table><thead><tr><th>Opportunities</th><th>Threats</th></tr></thead><tbody>
+<tr><td>Agentic research automation for strategy teams.</td><td>Incumbents can bundle AI into existing research subscriptions.</td></tr>
+<tr><td>Evidence-backed board and investment committee reporting.</td><td>Trust failures from unverified or outdated sources.</td></tr>
+<tr><td>Vertical research playbooks by industry.</td><td>Regulatory, privacy, and model governance expectations are rising.</td></tr>
+<tr><td>Competitive intelligence memory and monitoring.</td><td>Buyer fatigue if AI value is not tied to measurable outcomes.</td></tr>
+<tr><td>Governance-led AI adoption enablement.</td><td>Model/API cost volatility and quota constraints.</td></tr>
+</tbody></table>
+<figure><img src="../charts/swot_radar.png" alt="SWOT radar"/><figcaption>SWOT radar</figcaption></figure>
+<p><strong>Sources:</strong> <a href="../README.md">README</a> | <a href="../docs/ARCHITECTURE.md">Architecture</a> | <a href="https://www.ibm.com/reports/data-breach">IBM Cost of a Data Breach</a></p>
+<h2 id="customer-insights">Customer Insights</h2>
+<h3 id="primary-buyer-segments">Primary Buyer Segments</h3>
+<table><thead><tr><th>Segment</th><th>Estimated Demand Share</th><th>Need State</th><th>Purchase Driver</th></tr></thead><tbody>
+<tr><td>Strategy consulting</td><td>34%</td><td>Faster expert-grade market scans and client-ready reports.</td><td>Utilization leverage and repeatable delivery quality.</td></tr>
+<tr><td>Corporate strategy</td><td>27%</td><td>Always-on competitor, trend, and risk monitoring.</td><td>Faster executive decision cycles.</td></tr>
+<tr><td>Product marketing</td><td>20%</td><td>Messaging, segment, pricing, and competitor insights.</td><td>Launch planning and positioning clarity.</td></tr>
+<tr><td>Private equity</td><td>12%</td><td>Diligence, market mapping, and thesis validation.</td><td>Time-compressed investment decisions.</td></tr>
+<tr><td>Innovation teams</td><td>7%</td><td>Emerging technology and opportunity discovery.</td><td>Portfolio prioritization.</td></tr>
+</tbody></table>
+<figure><img src="../charts/customer_segments.png" alt="Customer segments"/><figcaption>Customer segments</figcaption></figure>
+<h3 id="customer-buying-criteria">Customer Buying Criteria</h3>
+<table><thead><tr><th>Criterion</th><th>Why It Matters</th><th>Product Proof Point</th></tr></thead><tbody>
+<tr><td>Source credibility</td><td>Executives need defensible findings.</td><td>Evidence records, source relationships, confidence scoring.</td></tr>
+<tr><td>Review control</td><td>AI output requires human accountability.</td><td>Reviewer/admin approval, reject, and flag actions.</td></tr>
+<tr><td>Repeatability</td><td>Research must become a system, not one-off prompting.</td><td>Research plans, jobs, templates, and memory.</td></tr>
+<tr><td>Output quality</td><td>Users need board-ready artifacts.</td><td>Reports page, export flow, executive dashboards.</td></tr>
+</tbody></table>
+<p><strong>Sources:</strong> <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI</a> | <a href="../backend/src/controllers/assistant.controller.js">Assistant Controller</a> | <a href="../backend/src/controllers/dashboard.controller.js">Dashboard Controller</a></p>
+<h2 id="market-opportunities">Market Opportunities</h2>
+<table><thead><tr><th>Opportunity</th><th>Attractiveness</th><th>Feasibility</th><th>Recommended Move</th></tr></thead><tbody>
+<tr><td>Governed agentic research</td><td>88</td><td>78</td><td>Ship as flagship pilot workflow.</td></tr>
+<tr><td>Evidence-backed board reporting</td><td>82</td><td>74</td><td>Bundle with executive PDF/report export.</td></tr>
+<tr><td>Competitive intelligence memory</td><td>79</td><td>81</td><td>Use Qdrant knowledge memory as switching-cost driver.</td></tr>
+<tr><td>Vertical playbooks</td><td>76</td><td>70</td><td>Create 3 industry templates before broad expansion.</td></tr>
+<tr><td>Data partnership marketplace</td><td>68</td><td>58</td><td>Defer until source partnerships and usage data justify complexity.</td></tr>
+</tbody></table>
+<figure><img src="../charts/market_opportunity_ranking.png" alt="Market opportunity ranking"/><figcaption>Market opportunity ranking</figcaption></figure>
+<h3 id="opportunity-prioritization">Opportunity Prioritization</h3>
+<ul>
+<li><strong>Near term:</strong> Governed agentic research and evidence-backed board reporting.</li>
+<li><strong>Mid term:</strong> Competitive intelligence memory and vertical playbooks.</li>
+<li><strong>Longer term:</strong> Data partnership marketplace after workflow demand is proven.</li>
+</ul>
+<p><strong>Sources:</strong> <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-forecasts-worldwide-ai-spending-to-grow-47-percent-in-2026">Gartner AI Spending</a> | <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI</a> | <a href="../docs/API.md">API Routes</a></p>
+<h2 id="risk-analysis">Risk Analysis</h2>
+<table><thead><tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr></thead><tbody>
+<tr><td>AI provider quota or model availability</td><td>4/5</td><td>4/5</td><td>Multi-provider abstraction, quota monitoring, deterministic fallback outputs.</td></tr>
+<tr><td>Unverified or stale source data</td><td>3/5</td><td>5/5</td><td>Mandatory citations, source freshness metadata, reviewer approval gates.</td></tr>
+<tr><td>Privacy and governance failure</td><td>3/5</td><td>5/5</td><td>RBAC, audit logs, data retention controls, AI access governance.</td></tr>
+<tr><td>Incumbent bundling pressure</td><td>4/5</td><td>3/5</td><td>Differentiate on workflow depth, evidence lineage, and speed.</td></tr>
+<tr><td>Low enterprise workflow adoption</td><td>3/5</td><td>4/5</td><td>Onboarding analytics, workflow templates, and executive success metrics.</td></tr>
+</tbody></table>
+<figure><img src="../charts/risk_heatmap.png" alt="Strategic risk heatmap"/><figcaption>Strategic risk heatmap</figcaption></figure>
+<figure><img src="../charts/ai_governance_risk_indicators.png" alt="AI governance risk indicators"/><figcaption>AI governance risk indicators</figcaption></figure>
+<h3 id="risk-readout">Risk Readout</h3>
+<ul>
+<li>AI security and governance have become buying requirements for enterprise AI systems.</li>
+<li>The product should surface data provenance, reviewer status, model/provider state, and confidence in the primary UX.</li>
+<li>Commercial messaging should treat governance as a productivity accelerator: less rework, fewer unsupported claims, and easier executive sign-off.</li>
+</ul>
+<p><strong>Sources:</strong> <a href="https://www.ibm.com/reports/data-breach">IBM Cost of a Data Breach</a> | <a href="https://newsroom.ibm.com/2025-07-30-ibm-report-13-of-organizations-reported-breaches-of-ai-models-or-applications%2C-97-of-which-reported-lacking-proper-ai-access-controls">IBM Newsroom</a> | <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report">Stanford AI Index 2026</a> | <a href="../docs/ARCHITECTURE.md">Architecture</a></p>
+<h2 id="ai-generated-strategic-recommendations">AI-generated Strategic Recommendations</h2>
+<table><thead><tr><th>Priority</th><th>Recommendation</th><th>Rationale</th><th>Success Metric</th></tr></thead><tbody>
+<tr><td>1</td><td>Launch with a governed research-workflow wedge.</td><td>Buyers have AI access but still struggle to scale trusted value.</td><td>30% reduction in analyst research cycle time.</td></tr>
+<tr><td>2</td><td>Make evidence lineage the product's signature feature.</td><td>Differentiates against chat-first and content-only competitors.</td><td>90%+ cited claims with source, confidence, and reviewer status.</td></tr>
+<tr><td>3</td><td>Package three executive workflows.</td><td>Simpler sales motion and faster activation.</td><td>Time-to-first-report under one business day.</td></tr>
+<tr><td>4</td><td>Build integrations selectively.</td><td>Strategy users need credible source inputs, not broad integration sprawl.</td><td>Top 5 data/source connectors used in 80% of active accounts.</td></tr>
+<tr><td>5</td><td>Establish a governance scorecard.</td><td>AI risk is now a board-level concern.</td><td>Every report includes source quality, confidence, and risk flags.</td></tr>
+</tbody></table>
+<h3 id="90-day-roadmap">90-Day Roadmap</h3>
+<table><thead><tr><th>Timeframe</th><th>Workstream</th><th>Actions</th></tr></thead><tbody>
+<tr><td>Days 0-30</td><td>Product proof</td><td>Create benchmark demos for competitor tracking, market entry, and diligence workflows.</td></tr>
+<tr><td>Days 31-60</td><td>Trust layer</td><td>Add exportable source-quality scorecards and reviewer-ready evidence summaries.</td></tr>
+<tr><td>Days 61-90</td><td>Commercial packaging</td><td>Define enterprise pilot offer, pricing hypothesis, ROI model, and success metrics.</td></tr>
+</tbody></table>
+<p><strong>Sources:</strong> <a href="../docs/ARCHITECTURE.md">Architecture</a> | <a href="../docs/API.md">API Routes</a> | <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI</a> | <a href="https://www.ibm.com/reports/data-breach">IBM Cost of a Data Breach</a></p>
+<h2 id="interactive-charts">Interactive Charts</h2>
+<p>The exported report embeds static PNG versions of the chart pack so the PDF is self-contained. The Markdown keeps chart paths clickable for direct inspection or reuse.</p>
+<table><thead><tr><th>Chart</th><th>File</th><th>Use</th></tr></thead><tbody>
+<tr><td>AI spending by market</td><td><a href="../charts/ai_spending_by_market.png">PNG</a></td><td>Market overview and budget pool sizing.</td></tr>
+<tr><td>AI adoption and value gap</td><td><a href="../charts/ai_adoption_value_gap.png">PNG</a></td><td>Industry trend and executive case for workflow discipline.</td></tr>
+<tr><td>AI private investment gap</td><td><a href="../charts/ai_private_investment_gap.png">PNG</a></td><td>Market momentum and geographic concentration.</td></tr>
+<tr><td>Competitive capability index</td><td><a href="../charts/competitive_capability_index.png">PNG</a></td><td>Competitor analysis.</td></tr>
+<tr><td>Customer segments</td><td><a href="../charts/customer_segments.png">PNG</a></td><td>Target buyer segmentation.</td></tr>
+<tr><td>Market opportunity ranking</td><td><a href="../charts/market_opportunity_ranking.png">PNG</a></td><td>Prioritization.</td></tr>
+<tr><td>Strategic risk heatmap</td><td><a href="../charts/risk_heatmap.png">PNG</a></td><td>Risk management.</td></tr>
+<tr><td>AI governance indicators</td><td><a href="../charts/ai_governance_risk_indicators.png">PNG</a></td><td>Governance and security case.</td></tr>
+<tr><td>SWOT radar</td><td><a href="../charts/swot_radar.png">PNG</a></td><td>Strategic balance.</td></tr>
+</tbody></table>
+<p><strong>Sources:</strong> <a href="../backend/src/controllers/assistant.controller.js">Assistant Controller</a> | <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-forecasts-worldwide-ai-spending-to-grow-47-percent-in-2026">Gartner AI Spending</a> | <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI</a> | <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report">Stanford AI Index 2026</a> | <a href="https://www.ibm.com/reports/data-breach">IBM Cost of a Data Breach</a></p>
+<h2 id="data-tables">Data Tables</h2>
+<h3 id="gartner-worldwide-ai-spending-by-market">Gartner Worldwide AI Spending by Market</h3>
+<table><thead><tr><th>Market</th><th>2025, USD millions</th><th>2026, USD millions</th><th>2027, USD millions</th></tr></thead><tbody>
+<tr><td>AI Infrastructure</td><td>975,581</td><td>1,431,509</td><td>1,890,310</td></tr>
+<tr><td>AI Services</td><td>436,351</td><td>585,527</td><td>759,418</td></tr>
+<tr><td>AI Software</td><td>282,897</td><td>453,209</td><td>638,431</td></tr>
+<tr><td>AI Cybersecurity</td><td>25,920</td><td>51,347</td><td>85,997</td></tr>
+<tr><td>AI Models</td><td>15,494</td><td>32,604</td><td>59,161</td></tr>
+</tbody></table>
+<h3 id="adoption-and-value-capture-indicators">Adoption and Value-Capture Indicators</h3>
+<table><thead><tr><th>Indicator</th><th>Value</th></tr></thead><tbody>
+<tr><td>AI use</td><td>88%</td></tr>
+<tr><td>Innovation enabled</td><td>64%</td></tr>
+<tr><td>Agent activity</td><td>62%</td></tr>
+<tr><td>Enterprise EBIT impact</td><td>39%</td></tr>
+<tr><td>Enterprise scaling</td><td>33%</td></tr>
+</tbody></table>
+<h3 id="competitive-capability-scores">Competitive Capability Scores</h3>
+<table><thead><tr><th>Competitor</th><th>Workflow</th><th>Evidence</th><th>Automation</th><th>Governance</th><th>Memory</th><th>Composite</th></tr></thead><tbody>
+<tr><td>AI Market Strategy Engine</td><td>92</td><td>88</td><td>90</td><td>86</td><td>84</td><td>88</td></tr>
+<tr><td>AlphaSense</td><td>78</td><td>84</td><td>62</td><td>72</td><td>70</td><td>73</td></tr>
+<tr><td>CB Insights</td><td>74</td><td>80</td><td>58</td><td>70</td><td>68</td><td>70</td></tr>
+<tr><td>Gartner</td><td>68</td><td>82</td><td>42</td><td>78</td><td>62</td><td>66</td></tr>
+<tr><td>Similarweb</td><td>62</td><td>74</td><td>52</td><td>66</td><td>58</td><td>62</td></tr>
+<tr><td>Perplexity Enterprise</td><td>70</td><td>66</td><td>76</td><td>60</td><td>64</td><td>67</td></tr>
+</tbody></table>
+<p><strong>Sources:</strong> <a href="../backend/src/controllers/assistant.controller.js">Assistant Controller</a> | <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-forecasts-worldwide-ai-spending-to-grow-47-percent-in-2026">Gartner AI Spending</a> | <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI</a> | <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report">Stanford AI Index 2026</a> | <a href="https://www.ibm.com/reports/data-breach">IBM Cost of a Data Breach</a></p>
+<h2 id="references">References</h2>
+<table><thead><tr><th>Source</th><th>Link</th></tr></thead><tbody>
+<tr><td>Gartner AI spending forecast, May 19, 2026</td><td><a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-forecasts-worldwide-ai-spending-to-grow-47-percent-in-2026">Gartner</a></td></tr>
+<tr><td>Stanford 2026 AI Index Report</td><td><a href="https://hai.stanford.edu/ai-index/2026-ai-index-report">Stanford HAI</a></td></tr>
+<tr><td>McKinsey State of AI 2025</td><td><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey</a></td></tr>
+<tr><td>IBM Cost of a Data Breach Report 2025</td><td><a href="https://www.ibm.com/reports/data-breach">IBM</a></td></tr>
+<tr><td>IBM AI breach newsroom release, July 30, 2025</td><td><a href="https://newsroom.ibm.com/2025-07-30-ibm-report-13-of-organizations-reported-breaches-of-ai-models-or-applications%2C-97-of-which-reported-lacking-proper-ai-access-controls">IBM Newsroom</a></td></tr>
+<tr><td>Project README</td><td><a href="../README.md">README</a></td></tr>
+<tr><td>Project architecture</td><td><a href="../docs/ARCHITECTURE.md">ARCHITECTURE.md</a></td></tr>
+<tr><td>Project API routes</td><td><a href="../docs/API.md">API.md</a></td></tr>
+<tr><td>Assistant analysis schema</td><td><a href="../backend/src/controllers/assistant.controller.js">assistant.controller.js</a></td></tr>
+<tr><td>Dashboard aggregation controller</td><td><a href="../backend/src/controllers/dashboard.controller.js">dashboard.controller.js</a></td></tr>
+</tbody></table>
+<h2 id="appendix">Appendix</h2>
+<h3 id="product-architecture-summary">Product Architecture Summary</h3>
+<table><thead><tr><th>Layer</th><th>Current Project Evidence</th></tr></thead><tbody>
+<tr><td>Frontend</td><td>Next.js 15, Tailwind CSS, shadcn-style components, Redux Toolkit, React Query, Recharts, Axios.</td></tr>
+<tr><td>Backend</td><td>Express, JWT auth, Bcrypt, Mongoose, LangGraph, DeepSeek, Tavily, Firecrawl, Playwright, Qdrant.</td></tr>
+<tr><td>Workflow</td><td>Intake, planning, approval, web research, extraction, validation, aggregation, report generation, review, audit logs, memory.</td></tr>
+<tr><td>Governance</td><td>Plan approval, evidence relationships, confidence scores, reviewer actions, audit logs.</td></tr>
+<tr><td>Memory</td><td>Knowledge records and optional Qdrant collection storage.</td></tr>
+</tbody></table>
+<h3 id="assumptions-and-limits">Assumptions and Limits</h3>
+<ul>
+<li>Market-size and adoption figures are sourced from public analyst/research references listed above.</li>
+<li>Competitive capability scores are directional strategy assessments based on product positioning and project capabilities; they are not reported market shares.</li>
+<li>Customer segment percentages are planning estimates for prioritization and should be validated through interviews, pilots, and CRM evidence.</li>
+<li>The report is generated as a static executive artifact; live dashboard interactivity remains in the application UI.</li>
+</ul>
+<h3 id="suggested-validation-plan">Suggested Validation Plan</h3>
+<table><thead><tr><th>Validation Item</th><th>Method</th><th>Target Evidence</th></tr></thead><tbody>
+<tr><td>Buyer willingness to pay</td><td>10-15 discovery calls by target segment.</td><td>Pain severity, budget owner, buying trigger, price range.</td></tr>
+<tr><td>Workflow ROI</td><td>Timed benchmark against manual research.</td><td>Analyst hours saved, rework avoided, source coverage.</td></tr>
+<tr><td>Trust controls</td><td>Reviewer usability test.</td><td>Approval time, rejected-claim rate, confidence-score usefulness.</td></tr>
+<tr><td>Data-source value</td><td>Connector pilot.</td><td>Source usage, citation quality, report acceptance.</td></tr>
+</tbody></table>
+<p><strong>Sources:</strong> <a href="../README.md">README</a> | <a href="../docs/ARCHITECTURE.md">Architecture</a> | <a href="../docs/API.md">API Routes</a> | <a href="../docs/TESTING.md">Testing Notes</a></p></main></body>
+</html>

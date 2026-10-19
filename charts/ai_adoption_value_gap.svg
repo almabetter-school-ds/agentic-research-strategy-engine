@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620">
+  <rect width="1100" height="620" fill="#f8fafc"/>
+  <rect x="24" y="24" width="1052" height="572" rx="18" fill="#ffffff" stroke="#dbe4ef"/>
+  <text x="56" y="72" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#0f2f57">AI Adoption and Value Capture Gap</text>
+  <text x="56" y="102" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#64748b">Adoption is broad, but scaling and enterprise-level EBIT impact still lag.</text>
+  <line x1="230" y1="120" x2="230" y2="490" stroke="#cbd5e1"/>
+  <line x1="230" y1="490" x2="1010" y2="490" stroke="#cbd5e1"/><text x="56" y="167" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">AI use</text>
+    <rect x="230" y="140" width="686.4" height="42" rx="8" fill="#2563eb"/>
+    <text x="920" y="167" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0f172a">88%</text><text x="56" y="237" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">Innovation enabled</text>
+    <rect x="230" y="210" width="499.2" height="42" rx="8" fill="#2563eb"/>
+    <text x="741.2" y="237" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0f172a">64%</text><text x="56" y="307" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">Agent activity</text>
+    <rect x="230" y="280" width="483.6" height="42" rx="8" fill="#2563eb"/>
+    <text x="725.6" y="307" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0f172a">62%</text><text x="56" y="377" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">Enterprise EBIT impact</text>
+    <rect x="230" y="350" width="304.2" height="42" rx="8" fill="#2563eb"/>
+    <text x="546.2" y="377" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0f172a">39%</text><text x="56" y="447" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155">Enterprise scaling</text>
+    <rect x="230" y="420" width="257.40000000000003" height="42" rx="8" fill="#2563eb"/>
+    <text x="499.40000000000003" y="447" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0f172a">33%</text>
+</svg>
