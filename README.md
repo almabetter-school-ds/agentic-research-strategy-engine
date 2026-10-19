@@ -85,7 +85,7 @@ The repository contains a Next.js frontend, an Express/MongoDB backend, LangGrap
 flowchart LR
   user[Consultant / Reviewer / Admin] --> frontend[Next.js 15 Frontend]
   frontend --> apiClient[Axios API Client]
-  frontend --> proxy[Next.js API Proxy /api/[...path]]
+  frontend --> proxy["Next.js API Proxy: /api/[...path]"]
   apiClient --> backend[Express REST API]
   proxy --> backend
   backend --> auth[JWT Auth + RBAC Middleware]
