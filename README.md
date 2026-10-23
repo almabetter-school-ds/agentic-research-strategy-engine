@@ -4,8 +4,22 @@ Production-oriented AI market intelligence platform for consultants, strategy te
 
 The repository contains a Next.js frontend, an Express/MongoDB backend, LangGraph research orchestration, DeepSeek-powered analysis, Tavily/Firecrawl/Playwright source collection, and Qdrant-backed semantic memory using local Transformers.js/ONNX text embeddings.
 
+## Live Deployment
+
+| Component | Live URL |
+|---|---|
+| **Web application** | [https://agentic-research-strategy-engine.vercel.app/](https://agentic-research-strategy-engine.vercel.app/) |
+| **Backend API (Render)** | [https://agentic-research-strategy-api.onrender.com](https://agentic-research-strategy-api.onrender.com) |
+| **Interactive API documentation (Swagger UI)** | [Open API docs](https://agentic-research-strategy-api.onrender.com/api-docs) |
+| **OpenAPI specification (JSON)** | [View OpenAPI JSON](https://agentic-research-strategy-api.onrender.com/api-docs.json) |
+| **Backend health check** | [Check API health](https://agentic-research-strategy-api.onrender.com/health) |
+| **Frontend API proxy** | `https://agentic-research-strategy-engine.vercel.app/api` |
+
+The web application uses the Next.js API proxy to forward browser API requests to the Render backend. Most API endpoints require authentication; the health check and API documentation are public.
+
 ## Table of Contents
 
+- [Live Deployment](#live-deployment)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Architecture](#architecture)
@@ -30,7 +44,7 @@ The repository contains a Next.js frontend, an Express/MongoDB backend, LangGrap
 | Area | Capabilities |
 |---|---|
 | Authentication and governance | Signup, login, token refresh, JWT authentication, role-based access control for `consultant`, `reviewer`, and `admin` users. |
-| Research workflow | Research intake, job creation, automatic planning, plan approval, workflow execution, status tracking, progress logs, and failure handling. |
+| Research workflow | One-submit research intake, automatic planning and plan approval, background workflow execution, progress tracking, failure handling, and report generation. |
 | AI analysis | DeepSeek-backed assistant chat and structured dashboard analysis with deterministic fallback behavior when AI quota or model access is unavailable. |
 | Evidence management | Source-linked evidence records, confidence scores, reviewer approval/rejection/flagging, and scoped access by role. |
 | Reports | Report listing, report detail, feedback capture, and export to Markdown, CSV, PDF, and DOCX. |
@@ -83,32 +97,37 @@ The repository contains a Next.js frontend, an Express/MongoDB backend, LangGrap
 
 ```mermaid
 flowchart LR
-  user[Consultant / Reviewer / Admin] --> frontend[Next.js 15 Frontend]
-  frontend --> apiClient[Axios API Client]
-  frontend --> proxy["Next.js API Proxy: /api/[...path]"]
-  apiClient --> backend[Express REST API]
+  user["Consultant, Reviewer, or Admin"] --> frontend["Next.js 15 Frontend"]
+  frontend --> apiClient["Axios API Client"]
+  frontend --> proxy["Next.js API Proxy"]
+  apiClient --> backend["Express REST API"]
   proxy --> backend
-  backend --> auth[JWT Auth + RBAC Middleware]
-  backend --> rateLimit[Rate Limit / CORS / Helmet]
-  backend --> mongo[(MongoDB / Mongoose)]
-  backend --> uploads[Upload Processing]
-  backend --> reports[Report Export Engine]
-  backend --> dashboard[Dashboard Aggregations]
-  backend --> researchFlow[LangGraph Research Workflow]
-  backend --> qdrant[(Qdrant Semantic Memory)]
-  researchFlow --> planner[Planner Agent]
-  researchFlow --> browser[Browser / Search Step]
-  researchFlow --> extract[Evidence Extraction]
-  researchFlow --> validate[Validation]
-  researchFlow --> aggregate[Aggregation]
-  researchFlow --> writer[Report Writer]
-  planner --> deepseek[DeepSeek API]
+
+  backend --> auth["JWT Authentication and RBAC"]
+  backend --> rateLimit["Rate Limiting, CORS, and Helmet"]
+  backend --> mongo[("MongoDB and Mongoose")]
+  backend --> uploads["Upload Processing"]
+  backend --> reports["Report Export Engine"]
+  backend --> dashboard["Dashboard Aggregations"]
+  backend --> researchFlow["LangGraph Research Workflow"]
+  backend --> qdrant[("Qdrant Semantic Memory")]
+
+  researchFlow --> planner["Planner Agent"]
+  researchFlow --> browser["Browser and Search Step"]
+  researchFlow --> extract["Evidence Extraction"]
+  researchFlow --> validate["Validation"]
+  researchFlow --> aggregate["Aggregation"]
+  researchFlow --> writer["Report Writer"]
+
+  planner --> deepseek["DeepSeek API"]
   extract --> deepseek
   aggregate --> deepseek
   writer --> deepseek
-  browser --> tavily[Tavily Search]
-  browser --> firecrawl[Firecrawl]
-  browser --> playwright[Playwright]
+
+  browser --> tavily["Tavily Search"]
+  browser --> firecrawl["Firecrawl"]
+  browser --> playwright["Playwright"]
+
   writer --> mongo
   writer --> qdrant
 ```
@@ -366,8 +385,13 @@ npm start
 |---|---|
 | Local backend | `http://localhost:8080` |
 | Local API prefix | `http://localhost:8080/api` |
-| Backend URL | Set your own Render URL in Vercel `API_URL`. |
-| Browser API prefix | `/api` (proxied through Next.js). |
+| Production backend | `https://agentic-research-strategy-api.onrender.com` |
+| Production API prefix | `https://agentic-research-strategy-api.onrender.com/api` |
+| Interactive API docs (Swagger UI) | [https://agentic-research-strategy-api.onrender.com/api-docs](https://agentic-research-strategy-api.onrender.com/api-docs) |
+| OpenAPI specification (JSON) | [https://agentic-research-strategy-api.onrender.com/api-docs.json](https://agentic-research-strategy-api.onrender.com/api-docs.json) |
+| Production health check | [https://agentic-research-strategy-api.onrender.com/health](https://agentic-research-strategy-api.onrender.com/health) |
+| Live frontend | [https://agentic-research-strategy-engine.vercel.app/](https://agentic-research-strategy-engine.vercel.app/) |
+| Browser API prefix | `https://agentic-research-strategy-engine.vercel.app/api` (proxied through Next.js). |
 
 All protected endpoints require:
 
@@ -415,13 +439,13 @@ curl -X POST http://localhost:8080/api/auth/signup \\
 
 | Method | Route | Auth | Description | Request | Success Response | Status Codes |
 |---|---|---:|---|---|---|---|
-| `POST` | `/api/research-jobs` | Yes | Create a research job, start background planning, auto-approve the generated plan, and execute workflow. | Body: `{ "question": "What is the AI opportunity in retail banking?", "industry": "Banking", "geography": "North America", "timeframe": "2026-2028", "competitors": ["JPMorgan", "Bank of America"], "outputType": "Market Entry Scan" }` | `201 { "job": { ... }, "plan": null, "accepted": true }` | `201`, `400`, `401` |
+| `POST` | `/api/research-jobs` | Yes | Create a research job, start background planning, auto-approve the generated plan, and execute workflow. | Body: `{ "question": "What is the AI opportunity in retail banking?", "industry": "Banking", "geography": "North America", "timeframe": "2026-2028", "competitors": ["JPMorgan", "Bank of America"], "outputType": "Market Entry Scan" }` | `201 { "job": { ... }, "plan": null, "accepted": true, "message": "Research accepted. Automatic report generation has started." }` | `201`, `400`, `401` |
 | `GET` | `/api/research-jobs` | Yes | List up to 100 research jobs. Consultants see their own jobs; reviewers/admins see all jobs. | Query: none | `{ "jobs": [{ ... }] }` | `200`, `401` |
 | `GET` | `/api/research-jobs/:id` | Yes | Get one job with its plan, sources, and evidence. Scoped to owner unless reviewer/admin. | Path: `id` | `{ "job": { ... }, "plan": { ... }, "sources": [{ ... }], "evidence": [{ ... }] }` | `200`, `401`, `404` |
 | `GET` | `/api/evidence` | Reviewer/Admin | List evidence records with optional status filter and summary counts. | Query: `status=pending&limit=200` | `{ "evidence": [{ ... }], "summary": { "pending": 4, "approved": 10 } }` | `200`, `401`, `403` |
 | `POST` | `/api/research-plan` | Yes | Regenerate a plan for a job owned by the user or any job for admin. | Body: `{ "jobId": "..." }` | `{ "plan": { ... } }` | `200`, `401`, `404` |
 | `POST` | `/api/research-jobs/:jobId/approve-plan` | Yes | Approve an existing research plan. | Path: `jobId` | `{ "plan": { ... } }` | `200`, `401`, `404` |
-| `POST` | `/api/research-jobs/:jobId/run` | Yes | Execute an approved research workflow synchronously. | Path: `jobId` | `{ "message": "Research workflow completed" }` | `200`, `401`, `404`, `503` |
+| `POST` | `/api/research-jobs/:jobId/run` | Yes | Start an already-approved research workflow in the background; poll the job endpoint for progress. A job can run only once. | Path: `jobId` | `202 { "accepted": true, "jobId": "...", "message": "Research workflow started. Check the job for progress." }` | `202`, `401`, `404`, `409` |
 | `POST` | `/api/browse` | Yes | Accepted compatibility endpoint; actual step is orchestrated through approved job execution. | Any body | `202 { "message": "This workflow step is orchestrated through approved research job execution.", "accepted": true }` | `202`, `401` |
 | `POST` | `/api/extract` | Yes | Accepted compatibility endpoint for extraction step. | Any body | `202 { "message": "This workflow step is orchestrated through approved research job execution.", "accepted": true }` | `202`, `401` |
 | `POST` | `/api/validate` | Yes | Accepted compatibility endpoint for validation step. | Any body | `202 { "message": "This workflow step is orchestrated through approved research job execution.", "accepted": true }` | `202`, `401` |
@@ -612,13 +636,13 @@ Frontend environment:
 
 ```bash
 NEXT_PUBLIC_API_URL=/api
-API_URL=https://YOUR-NEW-RENDER-SERVICE.onrender.com
+API_URL=https://agentic-research-strategy-api.onrender.com
 ```
 
-Frontend deployment URL (replace after creating the Vercel project):
+Frontend deployment URL:
 
 ```text
-https://YOUR-NEW-VERCEL-PROJECT.vercel.app
+https://agentic-research-strategy-engine.vercel.app/
 ```
 
 ### Backend: Render
@@ -641,29 +665,41 @@ Start command:
 npm start
 ```
 
-Backend deployment URL (replace after creating the Render service):
+Backend deployment URL:
 
 ```text
-https://YOUR-NEW-RENDER-SERVICE.onrender.com
+https://agentic-research-strategy-api.onrender.com
 ```
 
 Backend API URL:
 
 ```text
-https://YOUR-NEW-RENDER-SERVICE.onrender.com/api
+https://agentic-research-strategy-api.onrender.com/api
+```
+
+Interactive API documentation (Swagger UI):
+
+```text
+https://agentic-research-strategy-api.onrender.com/api-docs
+```
+
+OpenAPI specification (JSON):
+
+```text
+https://agentic-research-strategy-api.onrender.com/api-docs.json
+```
+
+Health check:
+
+```text
+https://agentic-research-strategy-api.onrender.com/health
 ```
 
 Render environment variables should be copied from `backend/.env.example`, with real production secrets and service credentials.
 
 ### Live Application URL
 
-After deployment, replace the placeholder below with the real frontend URL:
-
-```text
-https://YOUR-NEW-VERCEL-PROJECT.vercel.app
-```
-
-Replace all deployment URL placeholders above with the actual Render and Vercel URLs after deployment.
+The deployed application is available at [https://agentic-research-strategy-engine.vercel.app/](https://agentic-research-strategy-engine.vercel.app/). The backend is deployed on [Render](https://agentic-research-strategy-api.onrender.com), and the interactive API reference is available at [Swagger UI](https://agentic-research-strategy-api.onrender.com/api-docs).
 
 ## Troubleshooting
 
@@ -684,7 +720,7 @@ Replace all deployment URL placeholders above with the actual Render and Vercel 
 ## Future Enhancements
 
 - Add committed UI screenshots for every major page listed in the screenshots section.
-- Add OpenAPI/Swagger generation from Express routes and Zod schemas.
+- Keep the OpenAPI/Swagger specification synchronized with Express routes and Zod request schemas.
 - Add admin-only user management for creating and managing admin accounts safely.
 - Add background queue infrastructure for long-running research workflows.
 - Add persisted report export URLs instead of only streaming generated files.
