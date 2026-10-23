@@ -8,7 +8,7 @@ The repository contains a Next.js frontend, an Express/MongoDB backend, LangGrap
 
 | Component | Live URL |
 |---|---|
-| **Web application** | [live URL](https://agentic-research-strategy-engine.vercel.app/) |
+| **Web application** | [Open Application](https://agentic-research-strategy-engine.vercel.app/) |
 | **Interactive API documentation (Swagger UI)** | [Open API docs](https://agentic-research-strategy-api.onrender.com/api-docs) |
 | **Backend health check** | [Check API health](https://agentic-research-strategy-api.onrender.com/health) |
 
