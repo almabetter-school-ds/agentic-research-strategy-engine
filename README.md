@@ -9,11 +9,8 @@ The repository contains a Next.js frontend, an Express/MongoDB backend, LangGrap
 | Component | Live URL |
 |---|---|
 | **Web application** | [https://agentic-research-strategy-engine.vercel.app/](https://agentic-research-strategy-engine.vercel.app/) |
-| **Backend API (Render)** | [https://agentic-research-strategy-api.onrender.com](https://agentic-research-strategy-api.onrender.com) |
 | **Interactive API documentation (Swagger UI)** | [Open API docs](https://agentic-research-strategy-api.onrender.com/api-docs) |
-| **OpenAPI specification (JSON)** | [View OpenAPI JSON](https://agentic-research-strategy-api.onrender.com/api-docs.json) |
 | **Backend health check** | [Check API health](https://agentic-research-strategy-api.onrender.com/health) |
-| **Frontend API proxy** | `https://agentic-research-strategy-engine.vercel.app/api` |
 
 The web application uses the Next.js API proxy to forward browser API requests to the Render backend. Most API endpoints require authentication; the health check and API documentation are public.
 
