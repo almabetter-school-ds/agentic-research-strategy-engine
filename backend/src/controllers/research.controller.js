@@ -33,6 +33,101 @@ function ownedOrAdminJobQuery(req, id) {
   };
 }
 
+
+async function runResearchJobToReport(jobId) {
+  try {
+    const job = await ResearchJob.findById(jobId);
+
+    if (!job) {
+      throw new Error("Research job not found");
+    }
+
+    // Generate the research plan.
+    const plan = await plannerAgent(job);
+
+    // Approve the generated plan automatically.
+    const approvedPlan = await ResearchPlan.findOneAndUpdate(
+      {
+        _id: plan._id,
+        job: job._id,
+        status: "draft"
+      },
+      {
+        $set: {
+          status: "approved",
+          approvedBy: job.owner,
+          approvedAt: new Date()
+        }
+      },
+      { new: true }
+    );
+
+    if (!approvedPlan) {
+      throw new Error("Could not approve the generated research plan");
+    }
+
+    // Move the job to the approved state.
+    const approvedJob = await ResearchJob.findOneAndUpdate(
+      {
+        _id: job._id,
+        status: "planning"
+      },
+      {
+        $set: {
+          status: "approved",
+          progress: 18,
+          currentStep: "Plan Approved"
+        },
+        $push: {
+          logs: {
+            stage: "Planning",
+            message: "Research plan generated and approved automatically"
+          }
+        }
+      },
+      { new: true }
+    );
+
+    if (!approvedJob) {
+      throw new Error("Could not prepare the research job for execution");
+    }
+
+    // Run the existing research-to-report workflow.
+    await runResearchWorkflow(String(job._id));
+  } catch (err) {
+    const message = err?.message || "Automatic report generation failed";
+
+    console.error(`Automatic research failed for job ${jobId}:`, err);
+
+    try {
+      await ResearchJob.updateOne(
+        {
+          _id: jobId,
+          status: { $nin: ["review", "failed"] }
+        },
+        {
+          $set: {
+            status: "failed",
+            error: message,
+            currentStep: "Failed"
+          },
+          $push: {
+            logs: {
+              stage: "Error",
+              message,
+              level: "error"
+            }
+          }
+        }
+      );
+    } catch (updateError) {
+      console.error("Could not record research failure:", updateError);
+    }
+  }
+}
+
+
+
 export async function createResearchJob(req, res, next) {
   try {
     const input = intakeSchema.parse(req.body);
@@ -54,12 +149,23 @@ export async function createResearchJob(req, res, next) {
     res.status(201).json({
       job,
       plan: null,
-      accepted: true
+      accepted: true,
+      message: "Research accepted. Automatic report generation has started."
+    });
+
+    // Begin the complete research process after responding to the request.
+    setImmediate(() => {
+      void runResearchJobToReport(String(job._id));
     });
   } catch (err) {
-    next(err);
+    if (!res.headersSent) {
+      next(err);
+    } else {
+      console.error("Could not start automatic research:", err);
+    }
   }
 }
+
 
 export async function listResearchJobs(req, res, next) {
   try {
@@ -221,16 +327,71 @@ export async function approvePlan(req, res, next) {
   }
 }
 
+
 export async function executeApprovedWorkflow(req, res, next) {
   try {
-    const job = await ResearchJob.findOne(ownedOrAdminJobQuery(req, req.params.jobId)).select("_id");
-    if (!job) throw Object.assign(new Error("Research job not found"), { status: 404 });
-    await runResearchWorkflow(req.params.jobId);
-    res.json({ message: "Research workflow completed" });
+    const job = await ResearchJob.findOne(
+      ownedOrAdminJobQuery(req, req.params.jobId)
+    ).select("_id status");
+
+    if (!job) {
+      throw Object.assign(new Error("Research job not found"), {
+        status: 404
+      });
+    }
+
+    if (job.status !== "approved") {
+      throw Object.assign(
+        new Error(
+          `Research job cannot run from status "${job.status}". ` +
+          "Only approved jobs can be executed, and each job can run only once."
+        ),
+        { status: 409 }
+      );
+    }
+
+    const jobId = String(job._id);
+
+    // Start the workflow without making the HTTP request wait for the full report.
+    const workflowPromise = runResearchWorkflow(jobId);
+
+    // Handle any errors that occur before or outside the graph's own error handler.
+    workflowPromise.catch(async (err) => {
+      console.error(`Research workflow failed for job ${jobId}:`, err);
+
+      try {
+        await ResearchJob.updateOne(
+          { _id: jobId, status: "approved" },
+          {
+            $set: {
+              status: "failed",
+              error: err.message,
+              currentStep: "Failed"
+            },
+            $push: {
+              logs: {
+                stage: "Error",
+                message: err.message,
+                level: "error"
+              }
+            }
+          }
+        );
+      } catch (updateError) {
+        console.error("Could not update failed research job:", updateError);
+      }
+    });
+
+    res.status(202).json({
+      accepted: true,
+      jobId,
+      message: "Research workflow started. Check the job for progress."
+    });
   } catch (err) {
     next(err);
   }
 }
+
 
 export async function reviewEvidence(req, res, next) {
   try {
