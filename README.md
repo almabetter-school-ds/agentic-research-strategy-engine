@@ -42,13 +42,13 @@ The web application uses the Next.js API proxy to forward browser API requests t
 |---|---|
 | Authentication and governance | Signup, login, token refresh, JWT authentication, role-based access control for `consultant`, `reviewer`, and `admin` users. |
 | Research workflow | One-submit research intake, automatic planning and plan approval, background workflow execution, progress tracking, failure handling, and report generation. |
-| AI analysis | DeepSeek-backed assistant chat and structured dashboard analysis with deterministic fallback behavior when AI quota or model access is unavailable. |
+| AI analysis | DeepSeek-backed assistant chat, structured dashboard analysis, and a dedicated `/analysis` page for search-based AI analysis, with deterministic fallback behavior when AI quota or model access is unavailable. |
 | Evidence management | Source-linked evidence records, confidence scores, reviewer approval/rejection/flagging, and scoped access by role. |
 | Reports | Report listing, report detail, feedback capture, and export to Markdown, CSV, PDF, and DOCX. |
 | Dashboard analytics | MongoDB aggregation for active jobs, reports, evidence, uploaded files, connected data sources, trends, competitors, validation status, runtime, and recent activity. |
 | Knowledge base | MongoDB-backed knowledge memory with collection, tags, industry, geography, competitors, confidence, and Qdrant semantic search using local text embeddings. |
 | Upload data hub | Multi-file upload support for PDF, DOCX, XLSX, CSV, PPT, and PPTX files up to 50 MB each, eight files per request. |
-| Search and navigation | Global search across research jobs, reports, knowledge records, and uploaded files. |
+| Search and navigation | Global search across research jobs, reports, knowledge records, and uploaded files, with AI analysis opening on the dedicated `/analysis` page. |
 | Notifications | User notification list, unread counts, single notification read updates, and mark-all-read action. |
 | Frontend workspaces | Dashboard, research intake, workflow monitor, reports, evidence review, market intelligence, competitive analysis, forecasting, AI assistant, knowledge base, upload/data hub, data sources, operations, settings, and strategy framework pages. |
 
@@ -335,6 +335,19 @@ NEXT_PUBLIC_API_URL=/api
 
 ## Running the Application
 
+### Start Both Services Together
+
+From the project root directory, run:
+
+```bash
+npx -y concurrently -k -n BACKEND,FRONTEND "npm --prefix backend run dev" "npm --prefix frontend run dev"
+```
+
+- **Frontend:** http://localhost:3000
+- **Backend API:** http://localhost:8080
+
+Keep the terminal running while using the application.
+
 Run the backend API:
 
 ```bash
@@ -563,6 +576,7 @@ Major frontend pages present in source but without committed screenshots:
 | Signup | `/signup` |
 | Forgot password | `/forgot-password` |
 | Dashboard | `/dashboard` |
+| Analysis | `/analysis` |
 | Research intake | `/research-intake` |
 | Workflow monitor | `/workflow-monitor` |
 | Research plans | `/research-plans` |
