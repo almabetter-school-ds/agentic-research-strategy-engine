@@ -21,6 +21,7 @@ import { ForecastChart } from "./ForecastChart";
 import { ExportButtons } from "./ExportButtons";
 import { asArray } from "./analysisUtils";
 import { Button } from "../ui/button";
+import { ViewLatestAnalysisButton } from "./ViewLatestAnalysisButton";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 
@@ -36,8 +37,13 @@ export function AnalysisDashboard({ data, query, generatedAt, loading, error, on
           <h1 className="mt-2 text-xl font-semibold leading-tight sm:text-2xl lg:text-3xl">{data.title || query || "Market Analysis"}</h1>
           <p className="mt-2 text-sm text-muted-foreground">Generated from DeepSeek API{generatedAt ? ` · ${new Date(generatedAt).toLocaleString()}` : ""}</p>
         </div>
-        <ExportButtons data={data} pdfTargetId="analysis-dashboard-print" />
+
+        <div className="flex flex-wrap items-center gap-2">
+         <ViewLatestAnalysisButton />
+         <ExportButtons data={data} pdfTargetId="analysis-dashboard-print" />
+        </div>
       </div>
+
       <KPICards data={data} />
       <ExecutiveSummary data={data} />
       <section className="grid gap-4 xl:grid-cols-2">

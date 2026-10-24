@@ -8,16 +8,17 @@ import { useDispatch } from "react-redux";
 import { api } from "../../lib/api";
 import { setAnalysisError, setAnalysisLoading, setAnalysisResult } from "../../redux/store";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 export function GlobalSearch() {
   const [value, setValue] = useState("");
   const [debounced, setDebounced] = useState("");
   const [open, setOpen] = useState(false);
-  const [analysisOpen, setAnalysisOpen] = useState(false);
   const [active, setActive] = useState(0);
   const [recent, setRecent] = useState([]);
   const inputRef = useRef(null);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     setRecent(JSON.parse(localStorage.getItem("recentSearches") || "[]"));
@@ -29,7 +30,6 @@ export function GlobalSearch() {
       }
       if (event.key === "Escape") {
         setOpen(false);
-        setAnalysisOpen(false);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -47,16 +47,37 @@ export function GlobalSearch() {
     queryFn: async ({ signal }) => (await api.get("/search", { params: { q: debounced }, signal })).data.results
   });
 
-  const analyze = useMutation({
-    mutationFn: async term => (await api.post("/assistant/analyze", { query: term }, { timeout: 120000 })).data.analysis,
-    onSuccess: data => {
-      remember(value.trim());
-      dispatch(setAnalysisResult({ analysis: data, query: value.trim() }));
-      setOpen(false);
-      setAnalysisOpen(true);
-    },
-    onError: error => dispatch(setAnalysisError(error.message))
-  });
+
+    const analyze = useMutation({
+      mutationFn: async term =>
+        (
+          await api.post(
+            "/assistant/analyze",
+            { query: term },
+            { timeout: 120000 }
+          )
+        ).data.analysis,
+
+      onSuccess: data => {
+        const query = value.trim();
+
+        remember(query);
+
+        dispatch(setAnalysisResult({
+          analysis: data,
+          query
+        }));
+
+        setOpen(false);
+        router.push("/analysis");
+      },
+
+      onError: error => {
+        dispatch(setAnalysisError(error.message));
+        setOpen(true);
+      }
+    });
+
 
   const results = search.data || [];
   const visibleRecent = useMemo(() => recent.slice(0, 5), [recent]);
@@ -104,7 +125,6 @@ export function GlobalSearch() {
         onChange={event => {
           setValue(event.target.value);
           setOpen(true);
-          setAnalysisOpen(false);
         }}
         className="h-11 w-full rounded-xl border border-border/80 bg-card/90 px-11 pr-32 text-sm shadow-inner shadow-slate-900/5 outline-none transition-all duration-200 placeholder:text-muted-foreground/75 hover:border-border focus:border-primary/70 focus:bg-card focus:ring-2 focus:ring-primary/25 dark:bg-elevated/75 dark:shadow-black/10 dark:focus:bg-elevated/95 sm:h-12 sm:pr-36"
         placeholder="Search market, industry, company, competitor..."
@@ -116,7 +136,7 @@ export function GlobalSearch() {
         Analyze
       </Button>
 
-      {open && !analysisOpen && (
+      {open && (
         <div className="absolute left-0 right-0 top-12 z-40 rounded-xl border border-border/80 bg-card/95 p-2 shadow-2xl shadow-slate-900/15 ring-1 ring-slate-950/[0.03] backdrop-blur-xl dark:bg-card/95 dark:shadow-black/35 dark:ring-white/[0.03] sm:top-14">
           {search.isLoading && <p className="p-3 text-sm text-muted-foreground">Searching...</p>}
           {search.error && <p className="p-3 text-sm text-red-300">{search.error.message}</p>}
@@ -136,70 +156,6 @@ export function GlobalSearch() {
           ))}
         </div>
       )}
-
-      {(analysisOpen || analyze.error) && <AnalysisPanel analysis={analyze.data} error={analyze.error} onClose={() => setAnalysisOpen(false)} onRetry={runAnalyze} />}
-    </div>
-  );
-}
-
-function AnalysisPanel({ analysis, error, onClose, onRetry }) {
-  return (
-    <div className="absolute left-0 right-0 top-12 z-50 max-h-[78vh] overflow-auto rounded-2xl border border-primary/30 bg-card/95 p-4 shadow-2xl shadow-primary/15 backdrop-blur-xl dark:bg-[#071225] dark:shadow-primary/20 sm:top-14 sm:p-5">
-      <div className="mb-4 flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-wide text-primary">DeepSeek Market Analysis</p>
-          <h3 className="mt-1 text-lg font-semibold">{analysis?.title || "Analysis unavailable"}</h3>
-        </div>
-        <button className="text-muted-foreground hover:text-foreground" onClick={onClose} aria-label="Close analysis"><X size={18} /></button>
-      </div>
-      {error ? (
-        <div className="rounded-xl border border-red-500/30 bg-red-950/30 p-4">
-          <p className="text-sm text-red-200">{friendlyAnalysisError(error)}</p>
-          <Button className="mt-3" variant="secondary" onClick={onRetry}>Retry</Button>
-        </div>
-      ) : (
-        <div className="grid gap-4">
-          <p className="text-sm leading-6 text-muted-foreground">{analysis?.summary}</p>
-          <div className="grid gap-3 md:grid-cols-3">
-            <InsightBlock title="Market Signals" items={analysis?.marketSignals} />
-            <InsightBlock title="Opportunities" items={analysis?.opportunities} />
-            <InsightBlock title="Risks" items={analysis?.risks} />
-          </div>
-          <div className="grid gap-3 md:grid-cols-2">
-            <div className="rounded-xl border border-border bg-elevated/70 p-4">
-              <p className="mb-3 text-sm font-semibold">Competitor Moves</p>
-              <div className="grid gap-2">
-                {(analysis?.competitors || []).length ? analysis.competitors.map((item, index) => <p key={`${item.name}-${index}`} className="text-sm text-muted-foreground"><span className="font-medium text-foreground">{item.name}:</span> {item.movement}</p>) : <p className="text-sm text-muted-foreground">No competitor movements returned.</p>}
-              </div>
-            </div>
-            <InsightBlock title={`Recommendations · Confidence ${formatConfidence(analysis?.confidence)}%`} items={analysis?.recommendations} />
-          </div>
-          <InsightBlock title="Next Research Questions" items={analysis?.nextResearchQuestions} />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function friendlyAnalysisError(error) {
-  const message = error?.message || "Analysis failed";
-  if (/timeout/i.test(message)) return "Analysis is taking longer than expected. Please retry; the request now waits longer before timing out.";
-  return message;
-}
-
-function formatConfidence(value) {
-  const number = Number(value || 0);
-  if (!Number.isFinite(number)) return 0;
-  return Math.round(number > 1 ? number : number * 100);
-}
-
-function InsightBlock({ title, items = [] }) {
-  return (
-    <div className="rounded-xl border border-border bg-elevated/70 p-4">
-      <p className="mb-3 text-sm font-semibold">{title}</p>
-      <ul className="grid gap-2 text-sm text-muted-foreground">
-        {items?.length ? items.map((item, index) => <li key={index}>• {item}</li>) : <li>No data returned.</li>}
-      </ul>
     </div>
   );
 }

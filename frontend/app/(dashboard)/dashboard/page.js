@@ -13,6 +13,7 @@ import { Select } from "../../../components/ui/input";
 import { FloatingMenu } from "../../../components/ui/menu";
 import { Skeleton } from "../../../components/ui/skeleton";
 import { MetricCard } from "../../../components/dashboard/MetricCard";
+import { ViewLatestAnalysisButton } from "../../../components/dashboard/ViewLatestAnalysisButton";
 
 const MarketTrendsChart = dynamic(() => import("../../../components/dashboard/MarketTrendsChart").then(mod => mod.MarketTrendsChart), { ssr: false, loading: () => <Skeleton className="h-96" /> });
 const EmergingTrendsTable = dynamic(() => import("../../../components/dashboard/EmergingTrendsTable").then(mod => mod.EmergingTrendsTable), { ssr: false, loading: () => <Skeleton className="h-80" /> });
@@ -98,6 +99,7 @@ export default function DashboardPage() {
               <button className="mt-2 w-full rounded-md px-2 py-2 text-sm text-primary hover:bg-muted" onClick={() => updateSections(defaultSections)}>Reset layout</button>
             </FloatingMenu>
           </div>
+          <ViewLatestAnalysisButton />
         </div>
       </section>
 
